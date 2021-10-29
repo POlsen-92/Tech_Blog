@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Blog,Category,Tag,User } = require('../models');
+const { Blog,Category,User } = require('../models');
 
 router.get("/",(req,res)=>{
     Pet.findAll({

@@ -15,8 +15,8 @@ const seedAll = async () => {
   await seedCategories();
   console.log('\n----- CATEGORIES SEEDED -----\n');
 
-  await seedTags();
-  console.log('\n----- TAGS SEEDED -----\n');
+  await seedBlogs();
+  console.log('\n----- BLOGS SEEDED -----\n');
 
   process.exit(0);
 };
