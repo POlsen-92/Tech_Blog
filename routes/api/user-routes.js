@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../../models');
+const { Blog, Category, User} = require('../../models');
 const bcrypt = require("bcrypt");
+
+// The `http://localhost:3000/api/users` endpoint
 
 router.get("/",(req,res)=>{
     User.findAll({
-        include:[Pet,Group]
+        include:[Blog]
     }).then(dbUsers=>{
         if(dbUsers.length){
             res.json(dbUsers)
@@ -18,20 +20,7 @@ router.get("/",(req,res)=>{
     })
 })
 
-router.post("/",(req,res)=>{
-    User.create({
-        username:req.body.username,
-        password:req.body.password,
-        email:req.body.email
-    }).then(newUser=>{
-        res.json(newUser);
-    }).catch(err=>{
-        console.log(err);
-        res.status(500).json({message:"an error occured",err:err})
-    })
-})
-
-router.post("/login",(req,res)=>{
+router.post("/signin",(req,res)=>{
     User.findOne({
         where:{
             email:req.body.email
@@ -59,9 +48,23 @@ router.post("/login",(req,res)=>{
     })
 })
 
+router.post("/signup",(req,res)=>{
+    User.create({
+        username:req.body.username,
+        password:req.body.password,
+        email:req.body.email
+    }).then(newUser=>{
+        res.json(newUser);
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).json({message:"an error occured",err:err})
+    })
+})
+
 router.get("/logout",(req,res) => {
     req.session.destroy();
-    res.send("Logged out!")
+    res.send("Logged out!");
+    res.redirect("/homepage")
 })
 
 router.delete("/:id",(req,res)=>{

@@ -3,33 +3,33 @@ const router = express.Router();
 const { Blog,Category,User } = require('../models');
 
 router.get("/",(req,res)=>{
-    Pet.findAll({
+    Blog.findAll({
         order:["UserId"],
-        include:[User]
-    }).then(petData=>{
+        include:[User, Category]
+    }).then(blogData=>{
 
-        const hbsPets = petData.map(pet=>pet.get({plain:true}))
-        // res.json(hbsPets)
+        const hbsblogs = blogData.map(blog=>blog.get({plain:true}))
+        // res.json(hbsblogs)
         res.render("home",{
-            pets:hbsPets
+            blogs:hbsblogs
         })
     })
 })
 
 router.get("/profile",(req,res)=>{
     if(!req.session.user){
-        return res.status(401).send("login first!")
+        return res.status(401).send("Sign In first!")
     }
     User.findByPk(req.session.user.id,{
-        include:[Pet]
+        include:[Blog]
     }).then(userData=>{
         const hbsUser = userData.get({plain:true});
         res.render("profile",hbsUser)
     })
 })
 
-router.get("/login",(req,res)=>{
-    res.render("login")
+router.get("/signin",(req,res)=>{
+    res.render("signin")
 })
 
 module.exports = router;

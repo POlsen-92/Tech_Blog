@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+
+// http://localhost:3000/
+
 const frontEndRoutes = require("./frontEndRoutes.js");
 router.use(frontEndRoutes);
 const apiRoutes = require("./api");

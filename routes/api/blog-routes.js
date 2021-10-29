@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Blog, Category, User} = require('../../models');
 
-// The `/api/categories` endpoint
+// The `http://localhost:3000/api/blogs` endpoint
 
 // DONE - find all categories. be sure to include its associated Categories
 router.get('/', async (req, res) => {

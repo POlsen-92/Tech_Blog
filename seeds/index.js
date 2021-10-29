@@ -1,7 +1,6 @@
 const seedUsers = require('./user-seeds');
 const seedCategories = require('./category-seeds');
 const seedBlogs = require('./blog-seeds.js');
-const seedTags = require('./tag-seeds');
 
 const sequelize = require('../config/connection');
 
