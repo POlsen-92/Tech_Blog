@@ -2,8 +2,7 @@
 
 {{#each blogs}}
     <div class="card">
-        <h3>{{name}}</h3>
+        <a href="/blogs/{{id}}"><h3>{{name}}</h3></a>
         <h4>Writer: {{User.username}}</h4>
-        <h5>Category: {{category_id}}</h5>
     </div>
 {{/each}}

@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { Blog, Category, User} = require('../../models');
+const { Blog, User, Comment} = require('../../models');
 
 // The `http://localhost:3000/api/blogs` endpoint
 
-// DONE - find all categories. be sure to include its associated Categories
+// DONE - find all Blogs. be sure to include its associated Blogs
 router.get('/', async (req, res) => {
   try {
     const blogData = await Blog.findAll({
-      include: [{ model: Category }, { model: User }],
+      include: [User, Comment],
     });
     res.status(200).json(blogData);
   } catch (err) {
@@ -15,11 +15,11 @@ router.get('/', async (req, res) => {
   }
 });
 
-// DONE - find one Blog by its `id` value. be sure to include its associated Categories
+// DONE - find one Blog by its `id` value. be sure to include its associated Blogs
 router.get('/:id', async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
-      include: [{ model: Category }, { model: User }],
+      include: [User, Comment],
     });
 
     if (!blogData) {
@@ -39,7 +39,6 @@ router.post('/', async (req, res) => {
     const blogData = await Blog.create({
       name: req.body.name,
       description: req.body.description,
-      category_id: req.body.category,
       user_id: req.session.user.id
     })
     res.status(200).json(blogData)

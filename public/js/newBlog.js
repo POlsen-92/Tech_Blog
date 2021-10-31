@@ -1,12 +1,12 @@
-const logoutForm = document.querySelector("#login-form");
+const newBlogForm = document.querySelector("#newBlog-form");
 
-loginForm.addEventListener("submit",(e)=>{
+newBlogForm.addEventListener("submit",(e)=>{
     e.preventDefault();
     const userObj={
-        email:document.querySelector("#email").value,
-        password:document.querySelector("#password").value,
+        name:document.querySelector("#name").value,
+        description:document.querySelector("#description").value
     }
-    fetch("/api/users/login",{
+    fetch("/api/blogs/",{
         method:"POST",
         body:JSON.stringify(userObj),
         headers:{

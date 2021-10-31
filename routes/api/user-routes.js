@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Blog, Category, User} = require('../../models');
+const { Blog, User} = require('../../models');
 const bcrypt = require("bcrypt");
 
 // The `http://localhost:3000/api/users` endpoint
@@ -27,6 +27,7 @@ router.post("/signin",(req,res)=>{
         }
     }).then(foundUser=>{
         if(!foundUser){
+            req.session.destroy();
             res.status(401).json({message:"incorrect email or password"})
         } else {
             if(bcrypt.compareSync(req.body.password,foundUser.password)){
@@ -35,8 +36,7 @@ router.post("/signin",(req,res)=>{
                     email:foundUser.email,
                     id:foundUser.id
                 }
-                res.json(foundUser)
-                req.session.destroy();
+                res.json(foundUser) 
             } else {
                 res.status(401).json({message:"incorrect email or password"})
                 req.session.destroy();
@@ -49,6 +49,7 @@ router.post("/signin",(req,res)=>{
 })
 
 router.post("/signup",(req,res)=>{
+    req.session.destroy();
     User.create({
         username:req.body.username,
         password:req.body.password,
@@ -63,8 +64,7 @@ router.post("/signup",(req,res)=>{
 
 router.get("/logout",(req,res) => {
     req.session.destroy();
-    res.send("Logged out!");
-    res.redirect("/homepage")
+    res.render("logout");
 })
 
 router.delete("/:id",(req,res)=>{

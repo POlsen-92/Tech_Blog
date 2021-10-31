@@ -1,0 +1,30 @@
+{{!-- have main blog post --}}
+<section class="blog">
+  <div class="blog-details">
+    <h2>{{blog.name}}</h2>
+    <h5>{{blog.description}}</h5>
+    <p>Author: {{blog.User.username}}</p>
+  </div>
+</section>
+{{!-- comment section --}}
+    <div class="comments">
+        {{#each blog.Comments}}
+        <div class='card'>
+            <p>{{description}}</p>
+            <p>By: {{name}}</p>
+            {{!-- <button id="deleteComment">Delete</button> --}}
+        </div>
+        {{/each}}
+    </div>
+<br><br>
+
+{{!-- add comment section --}}
+    <form id="addComment-form">
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="description" placeholder="Content">
+        <button>Add Comment!</button>
+    </form>
+
+</section>
+<script src="/js/newComment.js"></script>
+<script src="/js/delete.js"></script>

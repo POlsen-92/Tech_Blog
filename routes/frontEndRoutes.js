@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { Blog,Category,User } = require('../models');
+const { Blog,User, Comment } = require('../models');
 
 router.get("/",(req,res)=>{
     Blog.findAll({
-        order:["UserId"],
-        include:[User, Category]
+        order:["id"],
+        include:[User]
     }).then(blogData=>{
-
         const hbsblogs = blogData.map(blog=>blog.get({plain:true}))
-        // res.json(hbsblogs)
-        res.render("home",{
+        res.render("homepage",{
             blogs:hbsblogs
         })
     })
@@ -18,7 +16,7 @@ router.get("/",(req,res)=>{
 
 router.get("/profile",(req,res)=>{
     if(!req.session.user){
-        return res.status(401).send("Sign In first!")
+        return res.status(401).render("no")
     }
     User.findByPk(req.session.user.id,{
         include:[Blog]
@@ -28,8 +26,40 @@ router.get("/profile",(req,res)=>{
     })
 })
 
+router.get("/blogs/:id", async(req,res)=>{
+    try {
+        const dbBlogData = await Blog.findByPk(req.params.id, {
+            include:[User,Comment]
+        });
+        const blog = dbBlogData.get({ plain: true });
+    
+        res.render('blog', { blog });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
+})
+
+router.get("/comments/:id", async(req,res)=>{
+    try {
+        const dbCommentData = await Comment.findByPk(req.params.id, {
+            include:[Blog]
+        });
+        const comment = dbCommentData.get({ plain: true });
+    
+        res.render('comment', { comment });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
+})
+
 router.get("/signin",(req,res)=>{
     res.render("signin")
+})
+
+router.get("/signup",(req,res)=>{
+    res.render("signup")
 })
 
 module.exports = router;
