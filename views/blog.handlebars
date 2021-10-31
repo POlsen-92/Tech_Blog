@@ -1,9 +1,10 @@
 {{!-- have main blog post --}}
+<br>
 <section class="blog">
   <div class="blog-details">
     <h2>{{blog.name}}</h2>
     <h5>{{blog.description}}</h5>
-    <p>Author: {{blog.User.username}}</p>
+    <p class="author">Author: {{blog.User.username}}</p>
   </div>
 </section>
 {{!-- comment section --}}
@@ -11,20 +12,19 @@
         {{#each blog.Comments}}
         <div class='card'>
             <p>{{description}}</p>
-            <p>By: {{name}}</p>
-            {{!-- <button id="deleteComment">Delete</button> --}}
+            <p class="author">By: {{name}}</p>
         </div>
+        <br>
         {{/each}}
     </div>
 <br><br>
 
 {{!-- add comment section --}}
     <form id="addComment-form">
-        <input type="text" id="name" placeholder="Name">
-        <input type="text" id="description" placeholder="Content">
+        <input type="text" id="name" placeholder="Name"> <br>
+        <textarea id="description" name="description" rows="4" cols="50">Add a Comment Here...</textarea><br>
         <button>Add Comment!</button>
     </form>
 
 </section>
 <script src="/js/newComment.js"></script>
-<script src="/js/delete.js"></script>

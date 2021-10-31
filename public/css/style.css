@@ -1,19 +1,25 @@
+body {
+    background-color: antiquewhite;
+}
 header {
-    background-image: url("../../assets/header.jpg");
-    height: 200px;
+    background-image: url("../images/header.jpg");
+    height: 300px;
     position: relative;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px dotted black;
     /* background-color: aqua; */
     /* z-index: 3; */
 }
 
-.link {
-    text-decoration: none;
-    color: black;
+.card {
+    border-bottom: black solid 2px;
+    border-top: black solid 2px;
 }
 
-header h1 {
-    margin-left: 20px;
-
+.link {
+    text-decoration: none;
+    color: rgb(110, 108, 108);
 }
 
 header ul {
@@ -29,8 +35,9 @@ header a {
     margin: 5px;
     border: black 1px solid; 
     border-radius: 5px;
-    padding: 2px;
-
+    padding: 0 4px;
+    background-color: rgb(250, 231, 199);
+    
 }
 
 header a:hover {
@@ -40,4 +47,9 @@ header a:hover {
 
 main {
     position: relative
+}
+
+.author {
+    text-align: right;
+    margin-right: 5px;
 }
