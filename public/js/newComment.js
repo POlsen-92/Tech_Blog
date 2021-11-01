@@ -25,3 +25,20 @@ newCommentForm.addEventListener("submit",(e)=>{
         }
     })
 })
+
+newAccountant.addEventListener ("submit", (e) =>{
+
+
+if (!accountant) {
+    fetch("/api/manatees", {
+        method: "POST"
+    })
+} else {
+    fetch("/api/manatees", {
+        method: "PUT"
+    })
+}
+
+
+}
+)

@@ -2,7 +2,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
   ## Description
-
+This webpage presents the capabilities to create a blog site utilizing a database created with mySQL, sequelize and handlebars.js
   
   ## Table Of Contents
   
@@ -14,6 +14,7 @@
   
   ## Installation/Usage
 
+Access the site using the Heroku URL (https://blog-po.herokuapp.com/) and within a user can sign up with an email and password, post articles and comments. 
 
   ![ScreenShot of My Program](./assets/screenshot_1.png)
 
